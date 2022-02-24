@@ -1,9 +1,10 @@
+const generateHTML = require('./src/generateHTML');
 const Manager = require('./lib/Manager');
 const Engineer = require('./lib/Engineer');
 const Intern = require('./lib/Intern');
 
-const fs = require('fs');
 const inquirer = require('inquirer');
+const fs = require('fs');
 
 const teamArray = [];
 
@@ -69,11 +70,11 @@ const addManager = () => {
         const manager = new Manager (name, id, email, officeNumber);
 
         teamArray.push(manager);
-        console.log(manager);
+        //console.log(manager);
     })
 };
 const addEmployee = () => {
-    console.log('Adding employees to team');
+    console.log('Next add employees to the team.');
 
     return inquirer.prompt([
         {
@@ -162,11 +163,11 @@ const addEmployee = () => {
 
         if(role === 'Engineer'){
             employee = new Engineer(name, id, email, github);
-            console.log(employee);
+            //console.log(employee);
         }
         if(role === 'Intern'){
             employee = new Intern(name, id, email, school);
-            console.log(employee);
+            //console.log(employee);
         }
         teamArray.push(employee);
 
@@ -178,4 +179,25 @@ const addEmployee = () => {
     })
 };
 
-addManager().then(addEmployee);
+const writeToFile = data => {
+    fs.writeFile('./dist/index.html', data, err => {
+        if (err) {
+            console.log(err);
+            return;
+        } else {
+            console.log('Your team webpage has been generated, your file is inside the ./dist/ folder labeled index.html')
+        }
+    })
+}; 
+
+addManager()
+  .then(addEmployee)
+  .then(teamArray => {
+    return generateHTML(teamArray);
+  })
+  .then(pageHTML => {
+    return writeToFile(pageHTML);
+  })
+  .catch(err => {
+ console.log(err);
+  });
