@@ -6,9 +6,7 @@ This application allows the user to create a webpage populated with information 
 
 ## Video
 
-**Please make sure your volume is at atleast 75% as my recorded audio was very quiet, sorry for the inconvenience.**
-
-[Walkthrough Video](https://www.youtube.com/watch?v=NwVc7bFz1rA)
+[Walkthrough Video](https://youtu.be/ZvV5g9aSC5E)
 
 ## Links
 
